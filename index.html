@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SoundBridge - Local Musician Platform</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #10101b;
+    color: white;
+}
+
+header {
+    background: #191927;
+    padding: 20px 6%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #333;
+}
+
+.logo {
+    font-size: 25px;
+    font-weight: bold;
+    color: #a78bfa;
+}
+
+nav button {
+    background: transparent;
+    border: none;
+    color: white;
+    margin-left: 15px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+nav button:hover {
+    color: #a78bfa;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 35px auto;
+}
+
+.hero {
+    background: linear-gradient(120deg, #30205c, #17172d);
+    padding: 55px 35px;
+    border-radius: 18px;
+    margin-bottom: 30px;
+}
+
+.hero h1 {
+    font-size: 38px;
+    margin-bottom: 15px;
+}
+
+.hero p {
+    color: #d1d1df;
+    line-height: 1.7;
+}
+
+button.primary {
+    background: #8b5cf6;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 18px;
+}
+
+button.primary:hover {
+    background: #7041db;
+}
+
+.section-title {
+    margin: 30px 0 20px;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+.card {
+    background: #1c1c2c;
+    padding: 22px;
+    border-radius: 13px;
+    border: 1px solid #333348;
+}
+
+.card h3 {
+    margin-bottom: 12px;
+    color: #c4b5fd;
+}
+
+.card p {
+    color: #b8b8c9;
+    line-height: 1.7;
+    font-size: 14px;
+}
+
+.stat {
+    font-size: 30px;
+    font-weight: bold;
+    margin: 12px 0;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 12px;
+    margin: 9px 0 15px;
+    background: #29293c;
+    border: 1px solid #45455b;
+    border-radius: 7px;
+    color: white;
+}
+
+label {
+    font-size: 14px;
+    color: #c4b5fd;
+}
+
+.form-box {
+    background: #1c1c2c;
+    padding: 25px;
+    border-radius: 13px;
+    max-width: 550px;
+    margin: 25px auto;
+}
+
+.artist-icon {
+    font-size: 35px;
+    margin-bottom: 12px;
+}
+
+.tag {
+    display: inline-block;
+    background: #38305d;
+    color: #c4b5fd;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    margin: 10px 0;
+}
+
+.status {
+    color: #86efac;
+    font-size: 13px;
+    margin-top: 12px;
+}
+
+.danger {
+    background: #dc4444 !important;
+}
+
+.hidden {
+    display: none !important;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    background: #1c1c2c;
+}
+
+th, td {
+    padding: 14px;
+    text-align: left;
+    border-bottom: 1px solid #39394a;
+    font-size: 13px;
+}
+
+th {
+    color: #c4b5fd;
+}
+
+footer {
+    background: #191927;
+    padding: 25px;
+    text-align: center;
+    color: #999;
+    margin-top: 50px;
+}
+
+#message {
+    margin-top: 12px;
+    color: #86efac;
+    font-size: 14px;
+}
+
+@media(max-width: 600px) {
+    header {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    nav button {
+        margin: 5px;
+    }
+
+    .hero h1 {
+        font-size: 27px;
+    }
+
+    table {
+        display: block;
+        overflow-x: auto;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">♫ SoundBridge</div>
+
+    <nav>
+        <button onclick="showPage('home')">Home</button>
+        <button onclick="showPage('artists')">Artists</button>
+        <button onclick="showPage('events')">Events</button>
+        <button onclick="showPage('login')">Login</button>
+    </nav>
+</header>
+
+<main class="container">
+
+<!-- HOME -->
+<section id="home">
+
+    <div class="hero">
+        <h1>Discover Local Music Talent 🎵</h1>
+        <p>
+            Connect local musicians, event organizers and music lovers
+            through one powerful online platform.
+            Discover artists, organize events and grow your music community.
+        </p>
+
+        <button class="primary" onclick="showPage('artists')">
+            Explore Musicians
+        </button>
+
+        <button class="primary" onclick="showPage('login')">
+            Join SoundBridge
+        </button>
+    </div>
+
+    <h2 class="section-title">Platform Overview</h2>
+
+    <div class="cards">
+
+        <div class="card">
+            <h3>🎸 Musicians</h3>
+            <div class="stat" id="artistCount">4</div>
+            <p>Registered local artists</p>
+        </div>
+
+        <div class="card">
+            <h3>🎤 Events</h3>
+            <div class="stat" id="eventCount">3</div>
+            <p>Available music events</p>
+        </div>
+
+        <div class="card">
+            <h3>📩 Bookings</h3>
+            <div class="stat" id="bookingCount">0</div>
+            <p>Performance booking requests</p>
+        </div>
+
+    </div>
+
+    <h2 class="section-title">Why SoundBridge?</h2>
+
+    <div class="cards">
+
+        <div class="card">
+            <h3>Artist Discovery</h3>
+            <p>Find talented singers, guitarists, DJs and bands.</p>
+        </div>
+
+        <div class="card">
+            <h3>Event Management</h3>
+            <p>Create events and manage performance schedules.</p>
+        </div>
+
+        <div class="card">
+            <h3>Easy Communication</h3>
+            <p>Connect musicians and event organizers through booking requests.</p>
+        </div>
+
+    </div>
+</section>
+
+<!-- ARTISTS -->
+<section id="artists" class="hidden">
+
+    <h2 class="section-title">Discover Local Musicians</h2>
+
+    <div class="cards" id="artistList"></div>
+
+</section>
+
+<!-- EVENTS -->
+<section id="events" class="hidden">
+
+    <h2 class="section-title">Upcoming Music Events</h2>
+
+    <div class="cards" id="eventList"></div>
+
+</section>
+
+<!-- LOGIN -->
+<section id="login" class="hidden">
+
+    <div class="form-box">
+
+        <h2>Login to SoundBridge</h2>
+        <p style="color:#aaa;margin:12px 0">
+            Select your role to access your dashboard.
+        </p>
+
+        <label>Your Name</label>
+        <input id="userName" placeholder="Enter your name">
+
+        <label>Select Your Role</label>
+        <select id="userRole">
+            <option value="musician">Musician</option>
+            <option value="organizer">Event Organizer</option>
+            <option value="fan">Music Fan</option>
+        </select>
+
+        <button class="primary" onclick="login()">Enter Dashboard</button>
+
+        <p id="message"></p>
+
+    </div>
+
+</section>
+
+<!-- DASHBOARD -->
+<section id="dashboard" class="hidden">
+
+    <h2 class="section-title">Welcome, <span id="welcomeName"></span>!</h2>
+
+    <p id="roleText" style="color:#aaa;margin-bottom:20px"></p>
+
+    <div class="cards">
+
+        <div class="card">
+            <h3>My Role</h3>
+            <p id="dashboardRole"></p>
+        </div>
+
+        <div class="card">
+            <h3>Total Musicians</h3>
+            <div class="stat" id="dashArtists">0</div>
+        </div>
+
+        <div class="card">
+            <h3>Total Events</h3>
+            <div class="stat" id="dashEvents">0</div>
+        </div>
+
+        <div class="card">
+            <h3>Booking Requests</h3>
+            <div class="stat" id="dashBookings">0</div>
+        </div>
+
+    </div>
+
+    <!-- MUSICIAN CONTROLS -->
+    <div id="musicianPanel" class="hidden">
+
+        <h2 class="section-title">Create Musician Profile</h2>
+
+        <div class="form-box">
+
+            <label>Artist Name</label>
+            <input id="newArtist" placeholder="Your artist name">
+
+            <label>Music Genre</label>
+            <select id="newGenre">
+                <option>Rock</option>
+                <option>Classical</option>
+                <option>Pop</option>
+                <option>Jazz</option>
+                <option>Hip Hop</option>
+                <option>Electronic</option>
+                <option>Folk</option>
+            </select>
+
+            <label>Location</label>
+            <input id="newLocation" placeholder="Your city">
+
+            <label>Experience</label>
+            <input id="newExperience" placeholder="Example: 2 years">
+
+            <button class="primary" onclick="addArtist()">
+                Save Artist Profile
+            </button>
+
+        </div>
+
+        <h2 class="section-title">Booking Requests</h2>
+        <div id="musicianBookings"></div>
+
+    </div>
+
+    <!-- ORGANIZER CONTROLS -->
+    <div id="organizerPanel" class="hidden">
+
+        <h2 class="section-title">Create Music Event</h2>
+
+        <div class="form-box">
+
+            <label>Event Name</label>
+            <input id="newEvent" placeholder="Enter event name">
+
+            <label>Event Location</label>
+            <input id="eventLocation" placeholder="Enter location">
+
+            <label>Event Date</label>
+            <input type="date" id="eventDate">
+
+            <label>Description</label>
+            <textarea id="eventDescription" placeholder="Describe your event"></textarea>
+
+            <button class="primary" onclick="addEvent()">
+                Publish Event
+            </button>
+
+        </div>
+
+        <h2 class="section-title">Manage Booking Requests</h2>
+        <div id="organizerBookings"></div>
+
+    </div>
+
+    <!-- FAN CONTROLS -->
+    <div id="fanPanel" class="hidden">
+
+        <h2 class="section-title">Explore SoundBridge</h2>
+
+        <div class="card">
+            <h3>Welcome to the Music Community!</h3>
+            <p>Discover talented local artists and find upcoming performances.</p>
+            <button class="primary" onclick="showPage('artists')">
+                Explore Artists
+            </button>
+            <button class="primary" onclick="showPage('events')">
+                View Events
+            </button>
+        </div>
+
+    </div>
+
+    <button class="primary danger" onclick="logout()">Logout</button>
+
+</section>
+
+</main>
+
+<footer>
+    <h3>♫ SoundBridge</h3>
+    <p>Connecting Local Musicians With The World.</p>
+    <p style="margin-top:10px">© 2026 SoundBridge. All Rights Reserved.</p>
+</footer>
+
+<script>
+
+// INITIAL DATA
+
+let artists = JSON.parse(localStorage.getItem("artists")) || [
+    {name:"Arjun Music",genre:"Rock",location:"Punjab",experience:"3 years"},
+    {name:"Riya Singer",genre:"Classical",location:"Delhi",experience:"5 years"},
+    {name:"DJ Rahul",genre:"Electronic",location:"Chandigarh",experience:"2 years"},
+    {name:"Aman Beats",genre:"Hip Hop",location:"Ludhiana",experience:"4 years"}
+];
+
+let events = JSON.parse(localStorage.getItem("events")) || [
+    {name:"Local Music Festival",location:"Punjab",date:"2026-12-15",description:"A celebration of local artists"},
+    {name:"Live Rock Night",location:"Chandigarh",date:"2026-12-20",description:"An evening of rock music"},
+    {name:"Acoustic Evening",location:"Delhi",date:"2026-12-25",description:"Live acoustic performances"}
+];
+
+let bookings = JSON.parse(localStorage.getItem("bookings")) || [];
+
+let currentUser = JSON.parse(sessionStorage.getItem("currentUser")) || null;
+
+
+// SAVE DATA
+
+function saveData() {
+    localStorage.setItem("artists",JSON.stringify(artists));
+    localStorage.setItem("events",JSON.stringify(events));
+    localStorage.setItem("bookings",JSON.stringify(bookings));
+}
+
+
+// PAGE NAVIGATION
+
+function showPage(page) {
+
+    document.querySelectorAll("main section").forEach(section => {
+        section.classList.add("hidden");
+    });
+
+    document.getElementById(page).classList.remove("hidden");
+
+    if(page === "artists") renderArtists();
+    if(page === "events") renderEvents();
+    if(page === "dashboard") renderDashboard();
+
+}
+
+
+// LOGIN
+
+function login() {
+
+    let name = document.getElementById("userName").value.trim();
+    let role = document.getElementById("userRole").value;
+
+    if(!name) {
+        document.getElementById("message").innerText =
+        "Please enter your name.";
+        return;
+    }
+
+    currentUser = {name,role};
+
+    sessionStorage.setItem("currentUser",JSON.stringify(currentUser));
+
+    showPage("dashboard");
+
+}
+
+
+// LOGOUT
+
+function logout() {
+
+    currentUser = null;
+    sessionStorage.removeItem("currentUser");
+
+    showPage("home");
+
+}
+
+
+// ARTIST LIST
+
+function renderArtists() {
+
+    let html = "";
+
+    artists.forEach((artist,index) => {
+
+        html += `
+        <div class="card">
+            <div class="artist-icon">🎸</div>
+            <h3>${escapeHTML(artist.name)}</h3>
+            <span class="tag">${escapeHTML(artist.genre)}</span>
+            <p>📍 ${escapeHTML(artist.location)}</p>
+            <p>Experience: ${escapeHTML(artist.experience)}</p>
+            <button class="primary" onclick="bookArtist(${index})">
+                Request Booking
+            </button>
+        </div>`;
+
+    });
+
+    document.getElementById("artistList").innerHTML = html;
+
+}
+
+
+// BOOKING SYSTEM
+
+function bookArtist(index) {
+
+    if(!currentUser) {
+        alert("Please login first to request a booking.");
+        showPage("login");
+        return;
+    }
+
+    let artist = artists[index];
+
+    if(currentUser.role === "musician") {
+        alert("Musicians cannot book themselves. Login as an organizer.");
+        return;
+    }
+
+    let booking = {
+        artist:artist.name,
+        requester:currentUser.name,
+        role:currentUser.role,
+        status:"Pending"
+    };
+
+    bookings.push(booking);
+    saveData();
+
+    alert("Booking request sent successfully!");
+
+    renderDashboard();
+
+}
+
+
+// ADD ARTIST
+
+function addArtist() {
+
+    let name = document.getElementById("newArtist").value.trim();
+    let genre = document.getElementById("newGenre").value;
+    let location = document.getElementById("newLocation").value.trim();
+    let experience = document.getElementById("newExperience").value.trim();
+
+    if(!name || !location || !experience) {
+        alert("Please fill all musician details.");
+        return;
+    }
+
+    artists.push({name,genre,location,experience});
+
+    saveData();
+
+    alert("Musician profile created successfully!");
+
+    renderDashboard();
+
+}
+
+
+// ADD EVENT
+
+function addEvent() {
+
+    let name = document.getElementById("newEvent").value.trim();
+    let location = document.getElementById("eventLocation").value.trim();
+    let date = document.getElementById("eventDate").value;
+    let description = document.getElementById("eventDescription").value.trim();
+
+    if(!name || !location || !date || !description) {
+        alert("Please fill all event details.");
+        return;
+    }
+
+    if(date < new Date().toISOString().split("T")[0]) {
+        alert("Please select a future date.");
+        return;
+    }
+
+    events.push({name,location,date,description});
+
+    saveData();
+
+    alert("Event published successfully!");
+
+    renderDashboard();
+
+}
+
+
+// EVENT DISPLAY
+
+function renderEvents() {
+
+    let html = "";
+
+    events.forEach(event => {
+
+        html += `
+        <div class="card">
+            <div class="artist-icon">🎤</div>
+            <h3>${escapeHTML(event.name)}</h3>
+            <p>📍 ${escapeHTML(event.location)}</p>
+            <p>📅 ${escapeHTML(event.date)}</p>
+            <p>${escapeHTML(event.description)}</p>
+        </div>`;
+
+    });
+
+    document.getElementById("eventList").innerHTML =
+        html || "<p>No events available.</p>";
+
+}
+
+
+// DASHBOARD
+
+function renderDashboard() {
+
+    if(!currentUser) {
+        showPage("login");
+        return;
+    }
+
+    document.getElementById("welcomeName").innerText = currentUser.name;
+
+    document.getElementById("dashboardRole").innerText =
+        currentUser.role.toUpperCase();
+
+    document.getElementById("dashArtists").innerText = artists.length;
+    document.getElementById("dashEvents").innerText = events.length;
+    document.getElementById("dashBookings").innerText = bookings.length;
+
+    document.getElementById("artistCount").innerText = artists.length;
+    document.getElementById("eventCount").innerText = events.length;
+    document.getElementById("bookingCount").innerText = bookings.length;
+
+    document.getElementById("roleText").innerText =
+        "Your personalized " + currentUser.role + " dashboard.";
+
+    ["musicianPanel","organizerPanel","fanPanel"].forEach(id => {
+        document.getElementById(id).classList.add("hidden");
+    });
+
+    if(currentUser.role === "musician") {
+        document.getElementById("musicianPanel").classList.remove("hidden");
+        renderBookings("musician");
+    }
+
+    if(currentUser.role === "organizer") {
+        document.getElementById("organizerPanel").classList.remove("hidden");
+        renderBookings("organizer");
+    }
+
+    if(currentUser.role === "fan") {
+        document.getElementById("fanPanel").classList.remove("hidden");
+    }
+
+}
+
+
+// BOOKING MANAGEMENT
+
+function renderBookings(type) {
+
+    let target = type === "musician" ?
+        "musicianBookings" : "organizerBookings";
+
+    let filtered = type === "musician" ?
+        bookings : bookings.filter(b => b.role === "organizer");
+
+    let html = "";
+
+    filtered.forEach((b,index) => {
+
+        let actualIndex = bookings.indexOf(b);
+
+        html += `
+        <div class="card" style="margin-bottom:12px">
+            <h3>${escapeHTML(b.artist)}</h3>
+            <p>Requested by: ${escapeHTML(b.requester)}</p>
+            <p class="status">Status: ${escapeHTML(b.status)}</p>
+
+            ${type === "organizer" && b.role === "organizer" ?
+            `<button class="primary" onclick="updateBooking(${actualIndex},'Approved')">Approve</button>
+             <button class="primary danger" onclick="updateBooking(${actualIndex},'Rejected')">Reject</button>`
+            : ""}
+        </div>`;
+
+    });
+
+    document.getElementById(target).innerHTML =
+        html || "<p style='color:#aaa'>No booking requests available.</p>";
+
+}
+
+
+// UPDATE BOOKING STATUS
+
+function updateBooking(index,status) {
+
+    bookings[index].status = status;
+
+    saveData();
+    renderDashboard();
+
+}
+
+
+// PREVENT HTML INJECTION IN USER DATA
+
+function escapeHTML(value) {
+    return String(value).replace(/[&<>"']/g, char => ({
+        "&":"&amp;",
+        "<":"&lt;",
+        ">":"&gt;",
+        '"':"&quot;",
+        "'":"&#39;"
+    })[char]);
+}
+
+
+// INITIALIZATION
+
+saveData();
+
+if(currentUser) {
+    showPage("dashboard");
+} else {
+    showPage("home");
+}
+
+renderDashboardStats();
+
+function renderDashboardStats() {
+    document.getElementById("artistCount").innerText = artists.length;
+    document.getElementById("eventCount").innerText = events.length;
+    document.getElementById("bookingCount").innerText = bookings.length;
+}
+
+</script>
+
+</body>
+</html>
